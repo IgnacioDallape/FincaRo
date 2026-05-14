@@ -12,14 +12,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --dark:      #1B1C1F;
-      --dark-2:    #222327;
-      --brown:     #7B6453;
-      --brown-l:   #9A7E6A;
+      --dark:      #1A1612;
+      --dark-2:    #261D17;
+      --brown:     #7A5540;
+      --brown-l:   #A07055;
       --cream:     #F2EBE0;
       --text:      #FFFFFF;
-      --muted:     #9C8E84;
-      --dim:       #5C5660;
+      --muted:     #A09890;
+      --dim:       #706560;
       --pill:      60px;
       --col:       900px;
     }
@@ -94,8 +94,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to top, rgba(27,28,31,0.97) 0%, rgba(27,28,31,0.3) 55%, rgba(27,28,31,0.15) 100%),
-        linear-gradient(to right, rgba(27,28,31,0.45) 0%, transparent 60%);
+        linear-gradient(to top, rgba(26,22,18,0.97) 0%, rgba(26,22,18,0.3) 55%, rgba(26,22,18,0.15) 100%),
+        linear-gradient(to right, rgba(26,22,18,0.45) 0%, transparent 60%);
     }
 
     .hero-content {
@@ -290,17 +290,38 @@
       transition: transform 0.6s ease;
     }
 
-    .prod-card:nth-child(1) .prod-card-img { background-position: center 55%; }
-    .prod-card:nth-child(2) .prod-card-img { background-position: left 40%; }
-    .prod-card:nth-child(3) .prod-card-img { background-position: right 70%; }
-    .prod-card:nth-child(4) .prod-card-img { background-position: center 20%; }
+    /* card 1 – propia, centro */
+    .prod-card:nth-child(1) .prod-card-img {
+      background-image: url('nueces.jpg');
+      background-position: center 55%;
+    }
+    /* card 2 – nueces en tabla, Unsplash */
+    .prod-card:nth-child(2) .prod-card-img {
+      background-image: url('https://images.unsplash.com/photo-1574856344991-aaa31b6f4045?auto=format&fit=crop&w=900&q=80');
+      background-position: center center;
+    }
+    /* card 3 – mitades de nuez, Unsplash */
+    .prod-card:nth-child(3) .prod-card-img {
+      background-image: url('https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=900&q=80');
+      background-position: center center;
+    }
+    /* card 4 – nueces a granel, propia otro crop */
+    .prod-card:nth-child(4) .prod-card-img {
+      background-image: url('nueces.jpg');
+      background-position: center 20%;
+    }
+    /* card 5 – nueces en mano / detalle, Unsplash */
+    .prod-card:nth-child(5) .prod-card-img {
+      background-image: url('https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?auto=format&fit=crop&w=900&q=80');
+      background-position: center center;
+    }
 
     .prod-card:hover .prod-card-img { transform: scale(1.06); }
 
     .prod-card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(13,10,8,0.88) 0%, rgba(13,10,8,0.1) 60%);
+      background: linear-gradient(to top, rgba(26,22,18,0.92) 0%, rgba(26,22,18,0.1) 60%);
     }
 
     .prod-card-body {
@@ -577,6 +598,42 @@
       background: linear-gradient(135deg, rgba(122,85,64,0.4) 0%, transparent 60%);
     }
 
+    /* ── PHOTO STRIP ── */
+    .photo-strip {
+      padding: 0 48px 100px;
+    }
+
+    .photo-strip-inner {
+      max-width: var(--col);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      height: 300px;
+    }
+
+    .strip-img {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .strip-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.8) saturate(0.85);
+      transition: transform 0.5s ease, filter 0.3s;
+    }
+    .strip-img:hover img { transform: scale(1.05); filter: brightness(0.9) saturate(1); }
+
+    @media (max-width: 768px) {
+      .photo-strip { padding: 0 24px 60px; }
+      .photo-strip-inner { grid-template-columns: 1fr 1fr; height: 220px; }
+      .strip-img:last-child { display: none; }
+    }
+
     /* ── FOOTER ── */
     footer {
       padding: 36px 48px;
@@ -762,7 +819,7 @@
   <section class="split" id="nosotros">
     <div class="split-inner">
       <div class="split-photo">
-        <img src="nueces.jpg" alt="Nueces Finca Fina — Valle de Uco, Mendoza" />
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Finca Fina — Valle de Uco, Mendoza" />
       </div>
       <div class="split-text">
         <p class="section-label">Nuestra historia</p>
@@ -818,6 +875,21 @@
           <h3 class="feat-title">Trato familiar</h3>
           <p class="feat-desc">Atención personalizada en cada pedido. Respondemos rápido y nos adaptamos a cada cliente.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO STRIP -->
+  <section class="photo-strip">
+    <div class="photo-strip-inner">
+      <div class="strip-img">
+        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=800&q=80" alt="Campo — Valle de Uco" />
+      </div>
+      <div class="strip-img">
+        <img src="nueces.jpg" alt="Nueces Finca Fina" style="object-position: center 35%;" />
+      </div>
+      <div class="strip-img">
+        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=800&q=80" alt="Viñedo Mendoza" />
       </div>
     </div>
   </section>
