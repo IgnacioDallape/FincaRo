@@ -7,934 +7,148 @@
   <meta name="description" content="Nueces premium desde el Valle de Uco, Mendoza. Calidad y excelencia en cada producto." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --dark:      #1A1612;
-      --dark-2:    #261D17;
-      --brown:     #7A5540;
-      --brown-l:   #A07055;
-      --cream:     #F2EBE0;
+      --bg-from:   #7A5540;
+      --bg-mid:    #4A3328;
+      --bg-to:     #1A1612;
       --text:      #FFFFFF;
       --muted:     #A09890;
       --dim:       #706560;
       --pill:      60px;
-      --col:       900px;
     }
-
-    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--dark);
+      background: radial-gradient(ellipse at 20% 30%, var(--bg-from) 0%, var(--bg-mid) 45%, var(--bg-to) 100%);
+      min-height: 100vh;
       color: var(--text);
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 200;
-      padding: 24px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      mix-blend-mode: normal;
+    .photo {
+      width: 100%;
+      height: clamp(320px, 50vh, 520px);
+      object-fit: cover;
+      object-position: center 60%;
+      display: block;
     }
 
-    .nav-logo {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.55);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #fff; }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      height: 100svh;
-      min-height: 600px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('nueces.jpg') center 60% / cover no-repeat;
-      transform: scale(1.04);
-      transition: transform 8s ease-out;
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to top, rgba(26,22,18,0.97) 0%, rgba(26,22,18,0.3) 55%, rgba(26,22,18,0.15) 100%),
-        linear-gradient(to right, rgba(26,22,18,0.45) 0%, transparent 60%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 48px 72px;
+    main {
       max-width: 820px;
+      margin: 0 auto;
+      padding: 64px 40px 80px;
     }
 
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 20px;
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(56px, 9vw, 110px);
+    .eyebrow {
+      font-size: 14px;
       font-weight: 400;
-      line-height: 0.92;
-      letter-spacing: -0.01em;
-      color: #fff;
+      color: var(--muted);
       margin-bottom: 32px;
     }
 
-    .hero-title em {
-      font-style: italic;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .hero-sub {
-      font-size: 15px;
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.55);
-      max-width: 480px;
-      margin-bottom: 44px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 28px;
-      border-radius: var(--pill);
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: none;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: #fff;
-      color: var(--dark);
-    }
-    .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
-
-    .btn-outline {
-      background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-    .btn-outline:hover { border-color: rgba(255,255,255,0.7); transform: translateY(-2px); }
-
-    /* ── STATS STRIP ── */
-    .stats {
-      background: var(--dark-2);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      padding: 40px 48px;
-    }
-
-    .stats-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-    }
-
-    .stat {
-      text-align: center;
-      padding: 0 20px;
-      border-right: 1px solid rgba(255,255,255,0.07);
-    }
-    .stat:last-child { border-right: none; }
-
-    .stat-num {
+    h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 48px;
+      font-size: clamp(38px, 6vw, 56px);
       font-weight: 400;
-      color: #fff;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 40px;
     }
 
-    .stat-label {
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── SECTION HEADER ── */
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 48px;
-    }
-
-    /* ── PRODUCTS ── */
-    .products {
-      padding: 100px 48px;
-      background: var(--dark);
-    }
-
-    .products-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-    }
-
-    .products-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 56px;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .products-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 400;
-      color: #fff;
-      line-height: 1.15;
-    }
-
-    .products-desc {
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--muted);
-      max-width: 300px;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 12px;
-    }
-
-    .prod-card {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      background: var(--dark-2);
-    }
-
-    .prod-card.large {
-      grid-row: span 2;
-      min-height: 520px;
-    }
-
-    .prod-card.small {
-      min-height: 240px;
-    }
-
-    .prod-card-img {
-      position: absolute;
-      inset: 0;
-      background: url('nueces.jpg') center / cover no-repeat;
-      transition: transform 0.6s ease;
-    }
-
-    /* card 1 – propia, centro */
-    .prod-card:nth-child(1) .prod-card-img {
-      background-image: url('nueces.jpg');
-      background-position: center 55%;
-    }
-    /* card 2 – nueces en tabla, Unsplash */
-    .prod-card:nth-child(2) .prod-card-img {
-      background-image: url('https://images.unsplash.com/photo-1574856344991-aaa31b6f4045?auto=format&fit=crop&w=900&q=80');
-      background-position: center center;
-    }
-    /* card 3 – mitades de nuez, Unsplash */
-    .prod-card:nth-child(3) .prod-card-img {
-      background-image: url('https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=900&q=80');
-      background-position: center center;
-    }
-    /* card 4 – nueces a granel, propia otro crop */
-    .prod-card:nth-child(4) .prod-card-img {
-      background-image: url('nueces.jpg');
-      background-position: center 20%;
-    }
-    /* card 5 – nueces en mano / detalle, Unsplash */
-    .prod-card:nth-child(5) .prod-card-img {
-      background-image: url('https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?auto=format&fit=crop&w=900&q=80');
-      background-position: center center;
-    }
-
-    .prod-card:hover .prod-card-img { transform: scale(1.06); }
-
-    .prod-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(26,22,18,0.92) 0%, rgba(26,22,18,0.1) 60%);
-    }
-
-    .prod-card-body {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 28px;
-    }
-
-    .prod-tag {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 8px;
-    }
-
-    .prod-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 400;
-      color: #fff;
-      line-height: 1.2;
-    }
-
-    .prod-card.small .prod-name { font-size: 20px; }
-
-    /* ── SPLIT SECTION ── */
-    .split {
-      padding: 0 48px 100px;
-    }
-
-    .split-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .split-photo {
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 480px;
-      position: relative;
-    }
-
-    .split-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 30%;
-      display: block;
-      filter: brightness(0.82) saturate(0.85);
-    }
-
-    .split-text {
-      background: var(--dark-2);
-      border-radius: 16px;
-      padding: 56px 48px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .split-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 400;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 28px;
-    }
-
-    .split-body {
-      font-size: 15px;
+    p {
+      font-size: 16px;
       font-weight: 300;
       line-height: 1.85;
       color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .split-location {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .split-location-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--brown-l);
-      flex-shrink: 0;
-    }
-
-    .split-location-text {
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      color: var(--dim);
-    }
-
-    /* ── QUOTE ── */
-    .quote-section {
-      padding: 0 48px 100px;
-    }
-
-    .quote-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-      background: var(--brown);
-      border-radius: 20px;
-      padding: 72px 64px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-inner::before {
-      content: '"';
-      position: absolute;
-      top: -20px;
-      left: 40px;
-      font-family: 'Playfair Display', serif;
-      font-size: 220px;
-      color: rgba(255,255,255,0.06);
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .quote-text {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 3vw, 32px);
-      font-weight: 400;
-      font-style: italic;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.55;
-      margin-bottom: 32px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .quote-attr {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-    }
-
-    /* ── FEATURES ── */
-    .features {
-      padding: 0 48px 100px;
-    }
-
-    .features-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-    }
-
-    .feat {
-      background: var(--dark-2);
-      padding: 40px 32px;
-      transition: background 0.2s;
-    }
-    .feat:first-child { border-radius: 16px 0 0 16px; }
-    .feat:last-child  { border-radius: 0 16px 16px 0; }
-    .feat:hover { background: #28211C; }
-
-    .feat-num {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      color: var(--dim);
-      margin-bottom: 40px;
-    }
-
-    .feat-title {
-      font-size: 16px;
-      font-weight: 500;
-      color: #fff;
-      margin-bottom: 12px;
-    }
-
-    .feat-desc {
-      font-size: 13px;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    /* ── CTA ── */
-    .cta {
-      padding: 0 48px 120px;
-    }
-
-    .cta-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .cta-text-block {
-      background: var(--dark-2);
-      border-radius: 16px;
-      padding: 56px 48px;
-    }
-
-    .cta-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dim);
+      text-align: justify;
       margin-bottom: 24px;
     }
 
-    .cta-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 400;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 40px;
-    }
-
-    .cta-btns {
+    .btns {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      max-width: 400px;
+      gap: 14px;
+      margin-top: 48px;
     }
 
-    .btn-full {
+    .btn {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
       padding: 20px 28px;
+      border-radius: var(--pill);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      border: 1.5px solid rgba(255,255,255,0.55);
+      background: transparent;
     }
 
-    .cta-photo-block {
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 400px;
-      position: relative;
+    .btn:hover { transform: translateY(-1px); opacity: 0.92; }
+
+    .btn-primary {
+      background: #fff;
+      color: #1A1612;
+      border-color: #fff;
     }
 
-    .cta-photo-block img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 45%;
-      display: block;
-      filter: brightness(0.75) saturate(0.8);
+    .btn-icon {
+      font-size: 18px;
+      line-height: 1;
     }
 
-    .cta-photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(122,85,64,0.4) 0%, transparent 60%);
-    }
-
-    /* ── PHOTO STRIP ── */
-    .photo-strip {
-      padding: 0 48px 100px;
-    }
-
-    .photo-strip-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      height: 300px;
-    }
-
-    .strip-img {
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .strip-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.8) saturate(0.85);
-      transition: transform 0.5s ease, filter 0.3s;
-    }
-    .strip-img:hover img { transform: scale(1.05); filter: brightness(0.9) saturate(1); }
-
-    @media (max-width: 768px) {
-      .photo-strip { padding: 0 24px 60px; }
-      .photo-strip-inner { grid-template-columns: 1fr 1fr; height: 220px; }
-      .strip-img:last-child { display: none; }
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 36px 48px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .footer-inner {
-      max-width: var(--col);
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .footer-logo {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .footer-mid {
-      font-size: 12px;
-      color: var(--dim);
-    }
-
-    .footer-copy {
-      font-size: 11px;
-      color: var(--dim);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 20px 24px; }
-      .nav-links { display: none; }
-
-      .hero-content { padding: 0 24px 56px; }
-
-      .stats { padding: 32px 24px; }
-
-      .products,
-      .split,
-      .quote-section,
-      .features,
-      .cta { padding-left: 24px; padding-right: 24px; }
-
-      .products-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .prod-card.large {
-        grid-column: span 2;
-        grid-row: span 1;
-        min-height: 300px;
-      }
-      .prod-card.small { min-height: 200px; }
-
-      .split-inner { grid-template-columns: 1fr; }
-      .split-photo { min-height: 300px; }
-
-      .quote-inner { padding: 48px 32px; }
-
-      .features-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 2px;
-      }
-      .feat:first-child { border-radius: 16px 0 0 0; }
-      .feat:last-child  { border-radius: 0 0 16px 0; }
-      .feat:nth-child(2) { border-radius: 0 16px 0 0; }
-      .feat:nth-child(3) { border-radius: 0 0 0 16px; }
-
-      .cta-inner { grid-template-columns: 1fr; }
-      .cta-photo-block { min-height: 280px; }
-
-      footer { padding: 28px 24px; }
-      .footer-mid { display: none; }
+    @media (max-width: 640px) {
+      main { padding: 48px 24px 64px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#">Finca Fina®</a>
-    <ul class="nav-links">
-      <li><a href="#productos">Productos</a></li>
-      <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-    </ul>
-  </nav>
+  <img class="photo" src="nueces.jpg" alt="Nueces Finca Fina — Valle de Uco, Mendoza" />
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg" id="heroBg"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Valle de Uco · Mendoza · Argentina</p>
-      <h1 class="hero-title">Finca<br><em>Fina®</em></h1>
-      <p class="hero-sub">Nueces premium desde el corazón de Mendoza. Calidad y excelencia en cada producto.</p>
-      <div class="hero-ctas">
-        <a href="https://wa.me/5492622547586" class="btn btn-primary" target="_blank">
-          Contacto directo <span>→</span>
-        </a>
-        <a href="#productos" class="btn btn-outline">
-          Ver productos
-        </a>
-      </div>
+  <main>
+    <p class="eyebrow">Nueces premium. Desde el Valle de Uco. Calidad y Excelencia.</p>
+
+    <h1>Finca Fina®</h1>
+
+    <p>
+      Finca Fina nace en el Valle de Uco, Mendoza, con un propósito claro: llevar la excelencia
+      de las nueces a cada rincón del país y del mundo. Somos una empresa familiar destacada
+      por el compromiso con la calidad en cada etapa del proceso: desde la producción hasta la
+      atención personalizada a cada cliente.
+    </p>
+
+    <p>
+      Finca Fina no solo vende nueces, entrega experiencias. Bajo la premisa de brindar una
+      atención cercana, eficiente y profesional, garantizando un servicio de excelencia tanto
+      en el mercado local como en operaciones de exportación.
+    </p>
+
+    <p>
+      Podés conocer nuestros productos desde cerca en Mercado Cooperativo de Guaymallén,
+      Mendoza, Argentina.
+    </p>
+
+    <div class="btns">
+      <a class="btn btn-primary" href="https://wa.me/5492622547586" target="_blank" rel="noopener">
+        Contacto directo ventas <span class="btn-icon">→</span>
+      </a>
+      <a class="btn" href="mailto:ff.fincafina@gmail.com">
+        Mail <span class="btn-icon">✉</span>
+      </a>
+      <a class="btn" href="https://instagram.com/fincafina_" target="_blank" rel="noopener">
+        Instagram <span class="btn-icon">↗</span>
+      </a>
     </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stats-inner">
-      <div class="stat">
-        <div class="stat-num">5+</div>
-        <div class="stat-label">Tipos de nuez</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Origen propio</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Calidad garantizada</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRODUCTS -->
-  <section class="products" id="productos">
-    <div class="products-inner">
-      <div class="products-header">
-        <h2 class="products-title">Nuestros<br>productos</h2>
-        <p class="products-desc">Selección cuidadosa de cada variedad. Del campo al empaque sin intermediarios.</p>
-      </div>
-      <div class="products-grid">
-        <div class="prod-card large">
-          <div class="prod-card-img"></div>
-          <div class="prod-card-overlay"></div>
-          <div class="prod-card-body">
-            <p class="prod-tag">Destacado</p>
-            <h3 class="prod-name">Nueces<br>Premium</h3>
-          </div>
-        </div>
-        <div class="prod-card small">
-          <div class="prod-card-img"></div>
-          <div class="prod-card-overlay"></div>
-          <div class="prod-card-body">
-            <p class="prod-tag">Variedad</p>
-            <h3 class="prod-name">Nuez Entera</h3>
-          </div>
-        </div>
-        <div class="prod-card small">
-          <div class="prod-card-img"></div>
-          <div class="prod-card-overlay"></div>
-          <div class="prod-card-body">
-            <p class="prod-tag">Variedad</p>
-            <h3 class="prod-name">Mitades</h3>
-          </div>
-        </div>
-        <div class="prod-card small">
-          <div class="prod-card-img"></div>
-          <div class="prod-card-overlay"></div>
-          <div class="prod-card-body">
-            <p class="prod-tag">Variedad</p>
-            <h3 class="prod-name">Cuartos</h3>
-          </div>
-        </div>
-        <div class="prod-card small">
-          <div class="prod-card-img"></div>
-          <div class="prod-card-overlay"></div>
-          <div class="prod-card-body">
-            <p class="prod-tag">Especial</p>
-            <h3 class="prod-name">Mariposa</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SPLIT -->
-  <section class="split" id="nosotros">
-    <div class="split-inner">
-      <div class="split-photo">
-        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Finca Fina — Valle de Uco, Mendoza" />
-      </div>
-      <div class="split-text">
-        <p class="section-label">Nuestra historia</p>
-        <h2 class="split-title">Una finca familiar con propósito</h2>
-        <p class="split-body">
-          Finca Fina nace en el Valle de Uco, Mendoza, con un propósito claro: llevar la excelencia de las nueces a cada rincón del país y del mundo.
-        </p>
-        <p class="split-body">
-          Somos una empresa familiar destacada por el compromiso con la calidad en cada etapa del proceso: desde la producción hasta la atención personalizada a cada cliente.
-        </p>
-        <p class="split-body">
-          No solo vendemos nueces — entregamos experiencias. Con atención cercana, eficiente y profesional, tanto en el mercado local como en exportación.
-        </p>
-        <div class="split-location">
-          <div class="split-location-dot"></div>
-          <span class="split-location-text">Mercado Cooperativo de Guaymallén, Mendoza, Argentina</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUOTE -->
-  <section class="quote-section">
-    <div class="quote-inner">
-      <p class="quote-text">
-        "Finca Fina no solo vende nueces, entrega experiencias. Calidad en cada etapa, desde la producción hasta la atención personalizada a cada cliente."
-      </p>
-      <p class="quote-attr">Finca Fina® — Valle de Uco, Mendoza</p>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features">
-    <div class="features-inner">
-      <div class="features-grid">
-        <div class="feat">
-          <p class="feat-num">01</p>
-          <h3 class="feat-title">Origen propio</h3>
-          <p class="feat-desc">Producción 100% propia en el Valle de Uco. Trazabilidad completa desde la planta hasta el empaque.</p>
-        </div>
-        <div class="feat">
-          <p class="feat-num">02</p>
-          <h3 class="feat-title">Calidad premium</h3>
-          <p class="feat-desc">Selección rigurosa de cada lote. Solo lo mejor llega a manos de nuestros clientes.</p>
-        </div>
-        <div class="feat">
-          <p class="feat-num">03</p>
-          <h3 class="feat-title">Exportación</h3>
-          <p class="feat-desc">Experiencia en mercado local e internacional. Gestión profesional en cada operación.</p>
-        </div>
-        <div class="feat">
-          <p class="feat-num">04</p>
-          <h3 class="feat-title">Trato familiar</h3>
-          <p class="feat-desc">Atención personalizada en cada pedido. Respondemos rápido y nos adaptamos a cada cliente.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PHOTO STRIP -->
-  <section class="photo-strip">
-    <div class="photo-strip-inner">
-      <div class="strip-img">
-        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=800&q=80" alt="Campo — Valle de Uco" />
-      </div>
-      <div class="strip-img">
-        <img src="nueces.jpg" alt="Nueces Finca Fina" style="object-position: center 35%;" />
-      </div>
-      <div class="strip-img">
-        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=800&q=80" alt="Viñedo Mendoza" />
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta" id="contacto">
-    <div class="cta-inner">
-      <div class="cta-text-block">
-        <p class="cta-eyebrow">Contacto</p>
-        <h2 class="cta-title">¿Querés conocer nuestros productos?</h2>
-        <div class="cta-btns">
-          <a href="https://wa.me/5492622547586" class="btn btn-primary btn-full" target="_blank">
-            <span>Contacto directo ventas</span> <span>→</span>
-          </a>
-          <a href="mailto:ff.fincafina@gmail.com" class="btn btn-outline btn-full">
-            <span>Mail</span> <span>✉</span>
-          </a>
-        </div>
-      </div>
-      <div class="cta-photo-block">
-        <img src="nueces.jpg" alt="Finca Fina productos" />
-        <div class="cta-photo-overlay"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <span class="footer-logo">Finca Fina®</span>
-      <span class="footer-mid">Valle de Uco — Mendoza, Argentina</span>
-      <span class="footer-copy">© 2025 Finca Fina. Todos los derechos reservados.</span>
-    </div>
-  </footer>
-
-  <script>
-    // subtle parallax on hero bg
-    const bg = document.getElementById('heroBg');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y < window.innerHeight) {
-        bg.style.transform = `scale(1.04) translateY(${y * 0.25}px)`;
-      }
-    }, { passive: true });
-  </script>
+  </main>
 
 </body>
 </html>
