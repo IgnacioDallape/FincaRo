@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finca Fina® — Frutos Secos Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-from:   #7A5540;
+      --bg-mid:    #4A3328;
+      --bg-to:     #1A1612;
+      --text:      #FFFFFF;
+      --text-muted:#A09890;
+      --text-dim:  #706560;
+      --btn-primary-bg: #FFFFFF;
+      --btn-primary-fg: #1A1612;
+      --btn-outline-border: rgba(255,255,255,0.55);
+      --radius-pill: 60px;
+      --max-w: 820px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(ellipse at 20% 30%, var(--bg-from) 0%, var(--bg-mid) 45%, var(--bg-to) 100%);
+      min-height: 100vh;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(26,22,18,0.6) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+    }
+
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 40px 80px;
+    }
+
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 40px;
+    }
+
+    .hero-body {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-muted);
+      text-align: justify;
+      max-width: 820px;
+      margin-bottom: 24px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 480px;
+      margin-top: 48px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-radius: var(--radius-pill);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      border: none;
+    }
+
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-fg);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--btn-outline-border);
+    }
+
+    .btn-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* ── PHOTO SECTION ── */
+    .photo-section {
+      padding: 0 40px 100px;
+    }
+
+    .photo-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .photo-wrap {
+      width: 100%;
+      height: clamp(320px, 50vw, 520px);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+      filter: brightness(0.88) saturate(0.9);
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 40px 40px 100px;
+    }
+
+    .features-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .features-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 56px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 48px 40px;
+    }
+
+    .feature-item {}
+
+    .feature-num {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 80px 40px 100px;
+    }
+
+    .about-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .about-body {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-muted);
+      text-align: justify;
+      margin-bottom: 24px;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 40px 40px 100px;
+    }
+
+    .cta-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .cta-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 40px;
+    }
+
+    .cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 540px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-dim);
+    }
+
+    .footer-place {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-dim);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 22px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .photo-section { padding: 0 24px 60px; }
+      .features { padding: 40px 24px 60px; }
+      .about { padding: 60px 24px 60px; }
+      .cta-section { padding: 40px 24px 60px; }
+      footer { padding: 32px 24px; }
+      .hero-title { letter-spacing: 0.08em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Finca Fina®</a>
+    <ul class="nav-links">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-tag">Frutos secos premium. Desde el Valle de Uco. Calidad y Excelencia.</p>
+      <h1 class="hero-title">Finca Fina®</h1>
+      <p class="hero-body">
+        Finca Fina nace en el Valle de Uco, Mendoza, con un propósito claro: llevar la excelencia
+        de los frutos secos a cada rincón del país y del mundo. Especialistas en nueces premium,
+        almendras, pistachos, pasas de uva y mixs. Somos una empresa familiar destacada por el
+        compromiso con la calidad en cada etapa del proceso: desde la producción hasta la atención
+        personalizada a cada cliente.
+      </p>
+      <p class="hero-body">
+        Finca Fina no solo vende frutos secos, entrega experiencias. Bajo la premisa de brindar
+        una atención cercana, eficiente y profesional, garantizando un servicio de excelencia
+        tanto en el mercado local como en operaciones de exportación.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/5492614000000" class="btn btn-primary" target="_blank">
+          Contacto directo ventas <span class="btn-icon">→</span>
+        </a>
+        <a href="mailto:ventas@fincafina.com" class="btn btn-outline">
+          Mail <span class="btn-icon">✉</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO -->
+  <section class="photo-section" id="productos">
+    <div class="photo-inner">
+      <div class="photo-wrap">
+        <img src="almendras.jpg" alt="Almendras Finca Fina — Valle de Uco, Mendoza" />
+        <span class="photo-caption">Almendras — Valle de Uco</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-inner">
+      <p class="features-label">Por qué elegirnos</p>
+      <div class="features-grid">
+        <div class="feature-item">
+          <p class="feature-num">01</p>
+          <h3 class="feature-title">Origen propio</h3>
+          <p class="feature-desc">Producción propia en el Valle de Uco, Mendoza. Trazabilidad completa desde la planta hasta el empaque.</p>
+        </div>
+        <div class="feature-item">
+          <p class="feature-num">02</p>
+          <h3 class="feature-title">Calidad premium</h3>
+          <p class="feature-desc">Selección rigurosa de cada lote. Nueces, almendras, pistachos y pasas de uva de primera categoría.</p>
+        </div>
+        <div class="feature-item">
+          <p class="feature-num">03</p>
+          <h3 class="feature-title">Exportación</h3>
+          <p class="feature-desc">Experiencia en mercado local e internacional. Gestión profesional de cada operación de exportación.</p>
+        </div>
+        <div class="feature-item">
+          <p class="feature-num">04</p>
+          <h3 class="feature-title">Trato familiar</h3>
+          <p class="feature-desc">Empresa familiar con atención personalizada. Respondemos rápido y nos adaptamos a cada cliente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="padding: 0 40px;"><div class="divider"></div></div>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="about-inner">
+      <p class="about-body">
+        Podés conocer nuestros productos desde cerca en el Mercado Cooperativo de Guaymallén,
+        Mendoza, Argentina.
+      </p>
+      <p class="about-body">
+        Trabajamos con distribuidores, revendedores, restaurantes y consumidores finales que
+        valoran la calidad por encima de todo. Si buscás frutos secos que marcan la diferencia,
+        estás en el lugar indicado.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section" id="contacto">
+    <div class="cta-inner">
+      <p class="cta-label">Contacto</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/5492614000000" class="btn btn-primary" target="_blank">
+          Contacto directo ventas <span class="btn-icon">→</span>
+        </a>
+        <a href="mailto:ventas@fincafina.com" class="btn btn-outline">
+          Mail <span class="btn-icon">✉</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Finca Fina®</span>
+      <span class="footer-place">Valle de Uco — Mendoza, Argentina</span>
+      <span class="footer-copy">© 2025 Finca Fina. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
